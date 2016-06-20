@@ -140,5 +140,4 @@ nnoremap <C-L> :nohl<CR><C-L>
  
 "------------------------------------------------------------
 execute pathogen#infect()
-set background=dark
-colorscheme solarized
+colorscheme evening
