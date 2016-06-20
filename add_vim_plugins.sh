@@ -9,6 +9,7 @@ git clone https://github.com/bling/vim-airline
 # git clone https://github.com/altercation/vim-colors-solarized
 git clone https://github.com/ervandew/supertab
 git clone https://github.com/scrooloose/syntastic
+git clone https://github.com/tpope/vim-fugitive
 
 # copy .vimrc in this repo to the user ~/.vimrc
 cp .vimrc ~/.vimrc
