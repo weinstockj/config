@@ -140,7 +140,7 @@ nnoremap <C-L> :nohl<CR><C-L>
  
 "------------------------------------------------------------
 execute pathogen#infect()
-colorscheme evening
+colorscheme desert
 
 
 " Make sure VIM knows terminal displays 256 colors instead of 8
