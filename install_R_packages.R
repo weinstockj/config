@@ -4,7 +4,7 @@ PACKAGES = c("dplyr",
             "magrittr", 
             "RMySQL", 
             "caret",
-            "lme4"
+            "lme4",
             "rstan",
             "gbm",
             "reshape2",
