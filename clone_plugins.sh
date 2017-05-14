@@ -8,6 +8,7 @@ git clone https://github.com/tpope/vim-fugitive && \
 git clone https://github.com/xuyuanp/nerdtree-git-plugin && \
 git clone https://github.com/bling/vim-bufferline && \
 git clone https://github.com/kien/ctrlp.vim && \
-git clone https://github.com/tomtom/tcomment_vim
+git clone https://github.com/tomtom/tcomment_vim && \
+git clone https://github.com/jalvesaq/nvim-r 
 
 
