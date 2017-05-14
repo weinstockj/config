@@ -146,3 +146,8 @@ colorscheme desert
 " Make sure VIM knows terminal displays 256 colors instead of 8
 " This was an issue on Mac OS X El Capitan
 let &t_Co=256
+" http://stackoverflow.com/questions/21346068/slow-performance-on-ctrlp-it-doesnt-work-to-ignore-some-folders
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  endif
