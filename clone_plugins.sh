@@ -9,6 +9,10 @@ git clone https://github.com/xuyuanp/nerdtree-git-plugin && \
 git clone https://github.com/bling/vim-bufferline && \
 git clone https://github.com/kien/ctrlp.vim && \
 git clone https://github.com/tomtom/tcomment_vim && \
-git clone https://github.com/jalvesaq/nvim-r 
+git clone https://github.com/jalvesaq/nvim-r  && \
+git clone https://github.com/broadinstitute/vim-wdl.git && \
+git clone git://github.com/JuliaEditorSupport/julia-vim.git
+
+
 
 
