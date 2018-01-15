@@ -1,3 +1,6 @@
+" File              : .vimrc
+" Date              : 15.01.2018
+" Last Modified Date: 15.01.2018
 " URL: http://vim.wikia.com/wiki/Example_vimrc
 " Authors: http://vim.wikia.com/wiki/Vim_on_Freenode
 " Description: A minimal, but feature rich, example .vimrc. If you are a
@@ -151,3 +154,7 @@ let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
   endif
+
+" commands for vim-header
+let g:header_field_author = 'Josh Weinstock'
+let g:header_field_author_email = 'jweinstk@umich.edu'
