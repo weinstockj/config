@@ -174,6 +174,8 @@ Plug 'akinsho/bufferline.nvim'
 Plug 'itchyny/lightline.vim'
 " If you want to have icons in your statusline choose one of these
 Plug 'kyazdani42/nvim-web-devicons'
+Plug 'github/copilot.vim'
+Plug 'JuliaEditorSupport/julia-vim'
 call plug#end()
 
 " set termguicolors
@@ -287,8 +289,28 @@ lua <<EOF
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   
+  require('lspconfig').rust_analyzer.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
+  require('lspconfig').r_language_server.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
+  require('lspconfig').julials.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
+  require('lspconfig').bashls.setup {
+    on_attach = on_attach,
+    capabilities = capabilities
+  }
+
 EOF
 
-:lua require'lspconfig'.r_language_server.setup{on_attach = on_attach}
-:lua require'lspconfig'.julials.setup{on_attach = on_attach}
-:lua require'lspconfig'.bashls.setup{on_attach = on_attach}
+" :lua require'lspconfig'.rust_analyzer.setup{on_attach = on_attach}
+" :lua require'lspconfig'.bashls.setup{on_attach = on_attach}
+" :lua require'lspconfig'.r_language_server.setup{on_attach = on_attach}
+" :lua require'lspconfig'.julials.setup{on_attach = on_attach}
+
+:let g:latex_to_unicode_auto=1
