@@ -139,7 +139,6 @@ map Y y$
 nnoremap <C-L> :nohl<CR><C-L>
  
 "------------------------------------------------------------
-colorscheme desert
 
 " Make sure VIM knows terminal displays 256 colors instead of 8
 " This was an issue on Mac OS X El Capitan
@@ -153,7 +152,10 @@ if executable('ag')
 let mapleader=","
 
 call plug#begin()
-Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'folke/tokyonight.nvim'
+Plug 'rebelot/kanagawa.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
@@ -169,8 +171,8 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'liuchengxu/vim-which-key'
 Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
-Plug 'akinsho/bufferline.nvim' 
-"Plug 'nvim-lualine/lualine.nvim'
+"Plug 'akinsho/bufferline.nvim' 
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'itchyny/lightline.vim'
 " If you want to have icons in your statusline choose one of these
 Plug 'kyazdani42/nvim-web-devicons'
@@ -188,3 +190,6 @@ call plug#end()
 let g:latex_to_unicode_auto=1
 
 lua require('init')
+
+"colorscheme kanagawa
+colorscheme tokyonight

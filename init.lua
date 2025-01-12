@@ -155,7 +155,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- }
 
 require('mason').setup()
-require('bufferline').setup()
+require('lualine').setup()
 
 require('CopilotChat').setup {
     -- See Configuration section for options
