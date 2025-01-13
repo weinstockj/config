@@ -183,6 +183,7 @@ Plug 'JuliaEditorSupport/julia-vim'
 Plug 'echasnovski/mini.indentscope'
 Plug 'echasnovski/mini.notify'
 Plug 'echasnovski/mini.clue'
+Plug 'snakemake/snakemake', {'rtp': 'misc/vim'}
 call plug#end()
 
 " set termguicolors
