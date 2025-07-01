@@ -1,0 +1,165 @@
+return {
+  -- Color schemes
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd([[colorscheme tokyonight]])
+    end,
+  },
+
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = true,
+  },
+
+  -- Web devicons
+  {
+    "nvim-tree/nvim-web-devicons",
+    lazy = true,
+  },
+
+  -- File explorer
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    cmd = "Neotree",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",
+      "MunifTanjim/nui.nvim",
+    },
+  },
+
+  -- Telescope fuzzy finder
+  {
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.8",
+    cmd = "Telescope",
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
+
+  -- Status line
+  {
+    "nvim-lualine/lualine.nvim",
+    event = "VeryLazy",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      -- CodeCompanion spinner component (from original config)
+      local spinner_symbols = {
+        "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏",
+      }
+      local spinner_symbols_len = 10
+
+      local CodeCompanionSpinner = require("lualine.component"):extend()
+      CodeCompanionSpinner.processing = false
+      CodeCompanionSpinner.spinner_index = 1
+
+      function CodeCompanionSpinner:init(options)
+        CodeCompanionSpinner.super.init(self, options)
+
+        local group = vim.api.nvim_create_augroup("CodeCompanionHooks", {})
+        vim.api.nvim_create_autocmd({ "User" }, {
+          pattern = "CodeCompanionRequest*",
+          group = group,
+          callback = function(request)
+            if request.match == "CodeCompanionRequestStarted" then
+              self.processing = true
+            elseif request.match == "CodeCompanionRequestFinished" then
+              self.processing = false
+            end
+          end,
+        })
+      end
+
+      function CodeCompanionSpinner:update_status()
+        if self.processing then
+          self.spinner_index = (self.spinner_index % spinner_symbols_len) + 1
+          return spinner_symbols[self.spinner_index]
+        else
+          return nil
+        end
+      end
+
+      require('lualine').setup({
+        sections = {
+          lualine_a = {'mode'},
+          lualine_b = {'branch', 'diff', 'diagnostics'},
+          lualine_c = {CodeCompanionSpinner},
+          lualine_x = {'encoding', 'fileformat', 'filetype'},
+          lualine_y = {'progress'},
+          lualine_z = {'location'}
+        }
+      })
+    end,
+  },
+
+  -- Mini plugins
+  {
+    "echasnovski/mini.indentscope",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require('mini.indentscope').setup()
+    end,
+  },
+
+  {
+    "echasnovski/mini.notify",
+    event = "VeryLazy",
+    config = function()
+      require('mini.notify').setup()
+    end,
+  },
+
+  {
+    "echasnovski/mini.clue",
+    event = "VeryLazy",
+    config = function()
+      local miniclue = require('mini.clue')
+      miniclue.setup({
+        triggers = {
+          { mode = 'n', keys = '<Leader>' },
+          { mode = 'x', keys = '<Leader>' },
+          { mode = 'i', keys = '<C-x>' },
+          { mode = 'n', keys = 'g' },
+          { mode = 'x', keys = 'g' },
+          { mode = 'n', keys = "'" },
+          { mode = 'n', keys = '`' },
+          { mode = 'x', keys = "'" },
+          { mode = 'x', keys = '`' },
+          { mode = 'n', keys = '"' },
+          { mode = 'x', keys = '"' },
+          { mode = 'i', keys = '<C-r>' },
+          { mode = 'c', keys = '<C-r>' },
+          { mode = 'n', keys = '<C-w>' },
+          { mode = 'n', keys = 'z' },
+          { mode = 'x', keys = 'z' },
+        },
+        clues = {
+          miniclue.gen_clues.builtin_completion(),
+          miniclue.gen_clues.g(),
+          miniclue.gen_clues.marks(),
+          miniclue.gen_clues.registers(),
+          miniclue.gen_clues.windows(),
+          miniclue.gen_clues.z(),
+        },
+      })
+    end,
+  },
+
+  -- Commentary
+  {
+    "tpope/vim-commentary",
+    keys = "gc",
+  },
+
+  -- Render markdown
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown", "codecompanion" },
+    config = function()
+      require('render-markdown').setup()
+    end,
+  },
+}
