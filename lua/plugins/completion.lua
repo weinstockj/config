@@ -15,6 +15,7 @@ return {
       "hrsh7th/cmp-path",
       "hrsh7th/cmp-cmdline",
       "hrsh7th/vim-vsnip",
+      "zbirenbaum/copilot-cmp",
     },
     config = function()
       local cmp = require("cmp")
@@ -37,6 +38,7 @@ return {
           ['<CR>'] = cmp.mapping.confirm({ select = true }),
         }),
         sources = cmp.config.sources({
+          { name = 'copilot' },
           { name = 'nvim_lsp' },
           { name = 'vsnip' },
         }, {

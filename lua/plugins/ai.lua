@@ -6,9 +6,18 @@ return {
     event = "InsertEnter",
     config = function()
       require("copilot").setup({
-        suggestion = { enabled = true },
+        suggestion = { enabled = false }, -- disable to use copilot-cmp
         panel = { enabled = false },
       })
+    end,
+  },
+
+  -- Copilot CMP integration
+  {
+    "zbirenbaum/copilot-cmp",
+    dependencies = { "zbirenbaum/copilot.lua" },
+    config = function()
+      require("copilot_cmp").setup()
     end,
   },
 
