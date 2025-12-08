@@ -1,3 +1,4 @@
+
 return {
   -- Color schemes
   {
@@ -84,13 +85,14 @@ return {
 
       require('lualine').setup({
         sections = {
-          lualine_a = {'mode'},
+          lualine_a = {'mode', 'buffers'},
           lualine_b = {'branch', 'diff', 'diagnostics'},
           lualine_c = {CodeCompanionSpinner},
           lualine_x = {'encoding', 'fileformat', 'filetype'},
           lualine_y = {'progress'},
           lualine_z = {'location'}
-        }
+        },
+        tabline = {}
       })
     end,
   },
