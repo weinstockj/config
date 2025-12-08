@@ -55,16 +55,16 @@ return {
 
   -- Language specific support
 
-  {
-    "snakemake/snakemake",
-    ft = "snakemake",
-    config = function()
-      vim.api.nvim_create_autocmd("BufNewFile,BufRead", {
-        pattern = { "Snakefile", "*.smk", "*.snakemake" },
-        callback = function()
-          vim.bo.filetype = "snakemake"
-        end,
-      })
-    end,
-  },
+  -- {
+  --   "snakemake/snakemake",
+  --   ft = "snakemake",
+  --   config = function()
+  --     vim.api.nvim_create_autocmd("BufNewFile,BufRead", {
+  --       pattern = { "Snakefile", "*.smk", "*.snakemake" },
+  --       callback = function()
+  --         vim.bo.filetype = "snakemake"
+  --       end,
+  --     })
+  --   end,
+  -- },
 }
