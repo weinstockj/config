@@ -1,7 +1,7 @@
 return {
   -- Mason for managing LSP servers
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     lazy = true,
     config = function()
       require("mason").setup()
@@ -10,8 +10,8 @@ return {
 
   -- Mason LSP config bridge
   {
-    "williamboman/mason-lspconfig.nvim",
-    lazy = false,
+    "mason-org/mason-lspconfig.nvim",
+    lazy = true,
     dependencies = { "mason.nvim" },
     config = function()
       require("mason-lspconfig").setup({
@@ -20,7 +20,6 @@ return {
           "r_language_server", 
           "bashls",
           "pylsp",
-          "lua_ls",
         },
       })
     end,
@@ -29,14 +28,13 @@ return {
   -- LSP Configuration
   {
     "neovim/nvim-lspconfig",
-    lazy = false,
+    lazy = true,
     dependencies = { 
       "mason.nvim", 
       "mason-lspconfig.nvim",
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
-      local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       -- LSP on_attach function for keymaps and settings
@@ -50,33 +48,18 @@ return {
         end
       end
 
-      -- Configure individual language servers
-      local servers = {
-        rust_analyzer = {},
-        r_language_server = {},
-        bashls = {},
-        pylsp = {},
-        lua_ls = {
-          settings = {
-            Lua = {
-              runtime = { version = "LuaJIT" },
-              diagnostics = { globals = { "vim" } },
-              workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
-                checkThirdParty = false,
-              },
-              telemetry = { enable = false },
-            },
-          },
-        },
-      }
+      -- Configure individual language servers using vim.lsp.config
+      vim.lsp.config('*', {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
 
-      -- Setup servers
-      for server, config in pairs(servers) do
-        config.on_attach = on_attach
-        config.capabilities = capabilities
-        lspconfig[server].setup(config)
-      end
+      vim.lsp.config.rust_analyzer = {}
+      vim.lsp.config.r_language_server = {}
+      vim.lsp.config.bashls = {}
+      vim.lsp.config.pylsp = {}
+      -- Enable the language servers
+      vim.lsp.enable({ 'rust_analyzer', 'r_language_server', 'bashls', 'pylsp' })
     end,
   },
 }
