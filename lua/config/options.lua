@@ -41,6 +41,15 @@ opt.signcolumn = "yes"
 opt.updatetime = 300
 opt.completeopt = { "menu", "menuone", "noselect" }
 
+-- ============================================================================
+-- HPC Performance Optimizations
+-- ============================================================================
+-- Reduce I/O operations on slow HPC filesystems
+opt.swapfile = false      -- Disable swap files (avoid I/O)
+opt.backup = false        -- No backup files
+opt.writebackup = false   -- No backup before overwriting
+opt.timeoutlen = 500      -- Faster key sequence completion
+
 -- Leader key
 vim.g.mapleader = ","
 vim.g.maplocalleader = "\\"

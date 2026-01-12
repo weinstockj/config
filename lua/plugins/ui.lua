@@ -39,6 +39,50 @@ return {
     tag = "0.1.8",
     cmd = "Telescope",
     dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      -- HPC Optimization: Configure for slow I/O
+      require("telescope").setup({
+        defaults = {
+          -- Ignore common large directories to speed up searches
+          file_ignore_patterns = {
+            "node_modules",
+            ".git/",
+            "*.pyc",
+            "__pycache__",
+            "%.o",
+            "%.a",
+            "%.out",
+            "%.class",
+            "%.pdf",
+            "%.mkv",
+            "%.mp4",
+            "%.zip",
+          },
+          vimgrep_arguments = {
+            "rg",
+            "--color=never",
+            "--no-heading",
+            "--with-filename",
+            "--line-number",
+            "--column",
+            "--smart-case",
+            "--hidden",
+            "--glob=!.git/",
+          },
+          layout_config = {
+            horizontal = {
+              preview_width = 0.55,
+            },
+          },
+        },
+        pickers = {
+          find_files = {
+            hidden = true,
+            no_ignore = false,
+          },
+        },
+      })
+    end,
   },
 
   -- Status line

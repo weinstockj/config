@@ -4,6 +4,8 @@ return {
     "mason-org/mason.nvim",
     lazy = true,
     config = function()
+      -- HPC Note: On HPC systems, consider pre-installing LSPs to ~/downloads/bin
+      -- and skipping Mason to avoid download/install overhead on startup
       require("mason").setup()
     end,
   },
