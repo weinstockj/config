@@ -16,6 +16,27 @@ keymap.set({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = t
 keymap.set({ "n", "v" }, "<LocalLeader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true, desc = "Toggle CodeCompanion Chat" })
 keymap.set("v", "ga", "<cmd>CodeCompanion Chat Add<cr>", { noremap = true, silent = true, desc = "Add selection to CodeCompanion Chat" })
 
+-- Telescope keymaps
+keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
+keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Live grep" })
+keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", { desc = "Find buffers" })
+keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Help tags" })
+keymap.set("n", "<leader>fo", "<cmd>Telescope oldfiles<cr>", { desc = "Recent files" })
+
+-- Buffer navigation
+keymap.set("n", "<leader>bd", "<cmd>bd<cr>", { desc = "Delete buffer" })
+keymap.set("n", "<Tab>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+keymap.set("n", "<S-Tab>", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+
+-- Window navigation
+keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
+keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to bottom window" })
+keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to top window" })
+keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+
+-- File explorer
+keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle file explorer" })
+
 -- LSP keymaps (will be set by LSP on_attach function)
 local function lsp_keymaps(bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
