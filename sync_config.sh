@@ -18,6 +18,7 @@ cp -f lua/plugins/completion.lua ~/.config/nvim/lua/plugins/
 cp -f lua/plugins/ui.lua ~/.config/nvim/lua/plugins/
 cp -f lua/plugins/treesitter.lua ~/.config/nvim/lua/plugins/
 cp -f lua/plugins/ai.lua ~/.config/nvim/lua/plugins/
+cp -f lua/plugins/editor.lua ~/.config/nvim/lua/plugins/
 
 echo "✅ Neovim configuration synced successfully!"
 echo "📁 Files copied to ~/.config/nvim/"

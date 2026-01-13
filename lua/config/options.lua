@@ -38,7 +38,6 @@ opt.expandtab = true
 -- Additional modern settings
 opt.termguicolors = true
 opt.signcolumn = "yes"
-opt.updatetime = 300
 opt.completeopt = { "menu", "menuone", "noselect" }
 
 -- ============================================================================
@@ -48,6 +47,8 @@ opt.completeopt = { "menu", "menuone", "noselect" }
 opt.swapfile = false      -- Disable swap files (avoid I/O)
 opt.backup = false        -- No backup files
 opt.writebackup = false   -- No backup before overwriting
+opt.updatetime = 1000     -- Increase updatetime (default 300) to reduce frequent background checks
+opt.shada = "!,'100,<50,s10,h" -- Limit Shada file: no global vars, max 100 files, <50 lines/reg, max 10KB size, disable hlsearch save
 opt.timeoutlen = 500      -- Faster key sequence completion
 
 -- Leader key

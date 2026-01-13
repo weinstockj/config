@@ -1,43 +1,32 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    branch = "master",
     build = ":TSUpdate",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter-textobjects",
-    },
     config = function()
-      require("nvim-treesitter.configs").setup({
-        -- A list of parser names, or "all"
-        ensure_installed = { 
-          "c", 
-          "lua", 
-          "vim", 
-          "vimdoc", 
-          "query", 
-          "markdown", 
-          "markdown_inline", 
-          "r", 
-          "bash", 
-          "julia", 
-          "python", 
-          "rust",
-          "json",
-          "yaml",
-          "toml",
+      require('nvim-treesitter.configs').setup({
+        ensure_installed = {
+          'c', 
+          'lua', 
+          'vim', 
+          'vimdoc', 
+          'query', 
+          'markdown', 
+          'markdown_inline', 
+          'r', 
+          'bash', 
+          'julia', 
+          'python', 
+          'rust',
+          'json',
+          'yaml',
+          'toml',
         },
-
-        -- Install parsers synchronously (only applied to `ensure_installed`)
-        sync_install = false,
-
-        -- Automatically install missing parsers when entering buffer
-        auto_install = false,
-
         highlight = {
           enable = true,
-          additional_vim_regex_highlighting = false,
-          -- HPC Optimization: Disable for large files on slow I/O
           disable = function(lang, buf)
+            -- HPC Optimization: Disable for large files on slow I/O
             local max_filesize = 100 * 1024 -- 100 KB
             local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
             if ok and stats and stats.size > max_filesize then
@@ -45,40 +34,7 @@ return {
             end
           end,
         },
-
-        indent = {
-          enable = true,
-        },
-
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<C-space>",
-            node_incremental = "<C-space>",
-            scope_incremental = false,
-            node_decremental = "<bs>",
-          },
-        },
-
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true,
-            keymaps = {
-              ["af"] = "@function.outer",
-              ["if"] = "@function.inner",
-              ["ac"] = "@class.outer",
-              ["ic"] = "@class.inner",
-            },
-          },
-        },
       })
     end,
-  },
-
-  -- Text objects for treesitter
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    lazy = true,
   },
 }

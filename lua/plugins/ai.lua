@@ -6,6 +6,7 @@ return {
     event = "InsertEnter",
     config = function()
       require("copilot").setup({
+        copilot_node_command = vim.fn.expand("$HOME") .. "/.nvm/versions/node/v25.3.0/bin/node",
         suggestion = { enabled = false }, -- disable to use copilot-cmp
         panel = { enabled = false },
       })

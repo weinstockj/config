@@ -87,6 +87,14 @@ return {
       "nvim-tree/nvim-web-devicons",
       "MunifTanjim/nui.nvim",
     },
+    config = function()
+      require("neo-tree").setup({
+        filesystem = {
+          use_libuv_file_watcher = false, -- HPC: Disable FS watcher (heavy on NFS)
+          follow_current_file = { enabled = false }, -- HPC: Expensive on large trees
+        },
+      })
+    end,
   },
 
   -- Telescope fuzzy finder
@@ -94,10 +102,17 @@ return {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.8",
     cmd = "Telescope",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = { 
+      "nvim-lua/plenary.nvim",
+      { 
+        "nvim-telescope/telescope-fzf-native.nvim", 
+        build = "make" 
+      }
+    },
     config = function()
       -- HPC Optimization: Configure for slow I/O
-      require("telescope").setup({
+      local telescope = require("telescope")
+      telescope.setup({
         defaults = {
           -- Ignore common large directories to speed up searches
           file_ignore_patterns = {
@@ -113,6 +128,8 @@ return {
             "%.mkv",
             "%.mp4",
             "%.zip",
+            "renv/",
+            ".snakemake/",
           },
           vimgrep_arguments = {
             "rg",
@@ -137,7 +154,18 @@ return {
             no_ignore = false,
           },
         },
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          }
+        }
       })
+      
+      -- Load fzf extension
+      pcall(telescope.load_extension, "fzf")
     end,
   },
 
