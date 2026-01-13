@@ -10,3 +10,4 @@ fi
 mkdir -p ~/downloads/bin/
 curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash -s -- --bin-dir ~/downloads/bin
 
+echo "eval "$(zoxide init bash)" >> ~/.bashrc
