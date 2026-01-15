@@ -118,7 +118,7 @@ return {
           file_ignore_patterns = {
             "node_modules",
             ".git/",
-            "*.pyc",
+            "%.pyc",
             "__pycache__",
             "%.o",
             "%.a",
@@ -130,6 +130,7 @@ return {
             "%.zip",
             "renv/",
             ".snakemake/",
+            ".pixi/",
           },
           vimgrep_arguments = {
             "rg",
@@ -165,7 +166,7 @@ return {
       })
       
       -- Load fzf extension
-      pcall(telescope.load_extension, "fzf")
+      -- pcall(telescope.load_extension, "fzf")
     end,
   },
 

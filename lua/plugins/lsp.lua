@@ -2,7 +2,7 @@ return {
   -- Mason for managing LSP servers
   {
     "mason-org/mason.nvim",
-    lazy = true,
+    lazy = false,
     config = function()
       -- HPC Note: On HPC systems, consider pre-installing LSPs to ~/downloads/bin
       -- and skipping Mason to avoid download/install overhead on startup
@@ -30,7 +30,7 @@ return {
   -- LSP Configuration
   {
     "neovim/nvim-lspconfig",
-    lazy = true,
+    lazy = false,
     dependencies = { 
       "mason.nvim", 
       "mason-lspconfig.nvim",
