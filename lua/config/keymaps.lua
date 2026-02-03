@@ -37,6 +37,10 @@ keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 -- File explorer
 keymap.set("n", "<leader>e", "<cmd>Neotree toggle<cr>", { desc = "Toggle file explorer" })
 
+-- Oil.nvim - filesystem editing
+keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+keymap.set("n", "<leader>-", "<CMD>Oil .<CR>", { desc = "Open current directory" })
+
 -- LSP keymaps (will be set by LSP on_attach function)
 local function lsp_keymaps(bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }

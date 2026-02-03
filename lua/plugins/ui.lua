@@ -97,6 +97,51 @@ return {
     end,
   },
 
+  -- Oil.nvim - edit filesystem like a buffer
+  {
+    "stevearc/oil.nvim",
+    lazy = false,  -- Official recommendation: do not lazy-load
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      -- HPC Performance Optimizations (matching neo-tree patterns)
+      watch_for_changes = false,  -- Disable FS watcher (heavy on NFS)
+      natural_order = "fast",     -- Turn off sorting for large directories
+      cleanup_delay_ms = 2000,    -- Match updatetime pattern
+
+      skip_confirm_for_simple_edits = true,  -- Less confirmation for single file ops
+
+      view_options = {
+        show_hidden = true,
+        is_hidden_file = function(name, bufnr)
+          return vim.startswith(name, ".")
+        end,
+        is_always_hidden = function(name, bufnr)
+          return name == ".." or name == ".git"
+        end,
+      },
+
+      -- Keymaps within oil buffers
+      keymaps = {
+        ["g?"] = "actions.show_help",
+        ["<CR>"] = "actions.select",
+        ["<C-s>"] = "actions.select_vsplit",
+        ["<C-h>"] = "actions.select_split",
+        ["<C-t>"] = "actions.select_tab",
+        ["<C-p>"] = "actions.preview",
+        ["<C-c>"] = "actions.close",
+        ["<C-l>"] = "actions.refresh",
+        ["-"] = "actions.parent",
+        ["_"] = "actions.open_cwd",
+        ["`"] = "actions.cd",
+        ["~"] = "actions.tcd",
+        ["gs"] = "actions.change_sort",
+        ["gx"] = "actions.open_external",
+        ["g."] = "actions.toggle_hidden",
+        ["g\\"] = "actions.toggle_trash",
+      },
+    },
+  },
+
   -- Telescope fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
