@@ -55,6 +55,14 @@ opt.timeoutlen = 500      -- Faster key sequence completion
 vim.g.mapleader = ","
 vim.g.maplocalleader = "\\"
 
+-- Set conceallevel for markdown (required for render-markdown.nvim)
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown" },
+  callback = function()
+    vim.opt_local.conceallevel = 2
+  end,
+})
+
 -- Plugin-specific globals
 vim.g.ctrlp_cache_dir = vim.fn.expand("$HOME") .. "/.cache/ctrlp"
 if vim.fn.executable("ag") == 1 then

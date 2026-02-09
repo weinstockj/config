@@ -2,42 +2,34 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
-    branch = "master",
+    branch = "main",
     build = ":TSUpdate",
     config = function()
-      require('nvim-treesitter.configs').setup({
-        ensure_installed = {
-          'c', 
-          'lua', 
-          'vim', 
-          'vimdoc', 
-          'query', 
-          'markdown', 
-          'markdown_inline', 
-          'r', 
-          'bash', 
-          'julia', 
-          'python', 
-          'rust',
-          'json',
-          'yaml',
-          'toml',
-        },
-        highlight = {
-          enable = true,
-          disable = function(lang, buf)
-            -- HPC Optimization: Disable for large files on slow I/O
-            local max_filesize = 100 * 1024 -- 100 KB
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            if ok and stats and stats.size > max_filesize then
-              return true
-            end
-          end,
-        },
+      require('nvim-treesitter').setup({})
+
+      -- Install parsers (async, no-op if already installed)
+      require('nvim-treesitter').install({
+        'c', 'lua', 'vim', 'vimdoc', 'query',
+        'markdown', 'markdown_inline',
+        'r', 'bash', 'julia', 'python', 'rust',
+        'json', 'yaml', 'toml', 'latex',
+      })
+
+      -- Enable treesitter highlighting via Neovim 0.11 built-in API
+      vim.api.nvim_create_autocmd('FileType', {
+        callback = function(args)
+          -- HPC Optimization: Disable for large files on slow I/O
+          local max_filesize = 100 * 1024 -- 100 KB
+          local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(args.buf))
+          if ok and stats and stats.size > max_filesize then
+            return
+          end
+          pcall(vim.treesitter.start)
+        end,
       })
     end,
   },
-  
+
   -- Treesitter context
   {
     "nvim-treesitter/nvim-treesitter-context",

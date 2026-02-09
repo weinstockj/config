@@ -334,8 +334,32 @@ return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown", "codecompanion" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
     config = function()
-      require('render-markdown').setup()
+      require("render-markdown").setup({
+        latex = {
+          enabled = true,
+          converter = "latex2text",
+          highlight = "RenderMarkdownMath",
+          top_pad = 0,
+          bottom_pad = 0,
+        },
+      })
     end,
+  },
+
+  -- LaTeX equation preview (ASCII art popup)
+  {
+    "jbyuki/nabla.nvim",
+    ft = { "markdown", "tex" },
+    keys = {
+      {
+        "<leader>lp",
+        function() require("nabla").popup() end,
+        desc = "LaTeX preview (popup)",
+      },
+    },
   },
 }
